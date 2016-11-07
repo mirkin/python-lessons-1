@@ -1,4 +1,4 @@
-#Python Lessons /#1 
+#Python Lessons \#1 
 Python/Coding lessons for my kids public for anyone else who may want to learn
 
 **Program Examples**
