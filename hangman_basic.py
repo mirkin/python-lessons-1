@@ -23,7 +23,7 @@ title='''
  | |_| |/ _` | '_ \ / _` | '_ ` _ \ / _` | '_ \\
  |  _  | (_| | | | | (_| | | | | | | (_| | | | |
  |_| |_|\__,_|_| |_|\__, |_| |_| |_|\__,_|_| |_|
-                    |___/
+                    |___/ Version: 1.0
 '''
 def search_for_letter_in_word(word,letter,search_pointer=0,locations=[]):
     """ return a list containing all indexes of the letter in the word, the
