@@ -75,7 +75,7 @@ Here we use a while loop, and the find method which is available for python
 strings.
 
 
-### Letter in word search
+### Letter in word search function
 
 Code [function-letter-search.py](function-letter-search.py)
 
@@ -87,7 +87,7 @@ Unless we need to modify the function we can forget how it works and anyone
 wishing to use it doesn't need to know how it works to use it. We just need to
 know what it does, what we need to send it and what it will return.
 
-### Letter in word search
+### Letter in word search recursive function
 
 Code [recursive-function-letter-search.py](recursive-function-letter-search.py)
 
