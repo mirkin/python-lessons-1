@@ -5,6 +5,9 @@ Python/Coding lessons for my kids public for anyone else who may want to learn
 
 * [Our first program](#our-first-program)
 * [Letter in word search](#letter-in-word-search)
+* [Letter in word search function](#letter-in-word-search-function)
+* [Letter in word search recursive function]
+(#letter-in-word-search-recursive-function)
 
 
 ##Intro
