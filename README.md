@@ -73,3 +73,27 @@ the locations of that letter are printed to the screen.
 
 Here we use a while loop, and the find method which is available for python
 strings.
+
+
+### Letter in word search
+
+Code [function-letter-search.py](function-letter-search.py)
+
+This is the same as letter in word search but we define our own function.
+Instead of printing the index of each letter found we return a list of indexes.
+Using our own function allows us to repeat functionality again and again
+without having to write extra code. We simply call the function.  
+Unless we need to modify the function we can forget how it works and anyone
+wishing to use it doesn't need to know how it works to use it. We just need to
+know what it does, what we need to send it and what it will return.
+
+### Letter in word search
+
+Code [recursive-function-letter-search.py](recursive-function-letter-search.py)
+
+Here we write the same function as  we did in the past, but we use recursion.
+Run the code in your head or on paper to see how it works. Feel free to skip
+recursion and come back later when you are interesed in learning about
+recursion.  
+Keep in mind every time the function is called it has it's own scope. Another
+copy of it's local variables.
