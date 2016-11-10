@@ -28,6 +28,121 @@ title='''
  |_| |_|\__,_|_| |_|\__, |_| |_| |_|\__,_|_| |_|
                     |___/ Version: 2.0
 '''
+visual_lives=['']*10
+visual_lives[0]='''
+                 +---------+
+                 |         |
+                 @         |
+                /H\        |
+                / \        |
+                ___________|___________
+               /           |          /|
+              /______________________/ |
+              |                      | /
+              |______________________|/
+'''
+visual_lives[1]='''
+                 +---------+
+                 |         |
+                 @         |
+                /H\        |
+                  \        |
+                ___________|___________
+               /           |          /|
+              /______________________/ |
+              |                      | /
+              |______________________|/
+'''
+visual_lives[2]='''
+                 +---------+
+                 |         |
+                 @         |
+                /H         |
+                  \        |
+                ___________|___________
+               /           |          /|
+              /______________________/ |
+              |                      | /
+              |______________________|/
+'''
+visual_lives[3]='''
+                 +---------+
+                 |         |
+                 @         |
+                /H         |
+                           |
+                ___________|___________
+               /           |          /|
+              /______________________/ |
+              |                      | /
+              |______________________|/
+'''
+visual_lives[4]='''
+                 +---------+
+                 |         |
+                 @         |
+                /          |
+                           |
+                ___________|___________
+               /           |          /|
+              /______________________/ |
+              |                      | /
+              |______________________|/
+'''
+visual_lives[5]='''
+                 +---------+
+                 |         |
+                 @         |
+                           |
+                           |
+                ___________|___________
+               /           |          /|
+              /______________________/ |
+              |                      | /
+              |______________________|/
+'''
+visual_lives[6]='''
+                 +---------+
+                 |         |
+                           |
+                           |
+                           |
+                ___________|___________
+               /           |          /|
+              /______________________/ |
+              |                      | /
+              |______________________|/
+'''
+visual_lives[7]='''
+                 +---------+
+                           |
+                           |
+                           |
+                           |
+                ___________|___________
+               /           |          /|
+              /______________________/ |
+              |                      | /
+              |______________________|/
+'''
+visual_lives[8]='''
+                           |
+                           |
+                           |
+                           |
+                ___________|___________
+               /           |          /|
+              /______________________/ |
+              |                      | /
+              |______________________|/
+'''
+visual_lives[9]='''
+                _______________________
+               /                      /|
+              /______________________/ |
+              |                      | /
+              |______________________|/
+'''
 def search_for_letter_in_word(word,letter,search_pointer=0,locations=[]):
     """ return a list containing all indexes of the letter in the word, the
     search_pointer and locations are used internally for the recursion to work 
@@ -90,7 +205,7 @@ def play_game():
     """ Play a round of hangman
     """
     print(title) # Print our awesome title
-    lives=10 # Reset lives to 10
+    lives=9 # Reset lives
     word=random.choice(word_list) # Picks a word at random from our word_list
     # For checking let's use lowercase to avoid confusion
     word_lower=word.lower()
@@ -101,6 +216,7 @@ def play_game():
     # Show any dashes in guess
     guess=map_char_from_word1_to_word2(word_lower,guess,'-','-')
     while True: # Infinte loop we will break if we win or lose
+        print(visual_lives[lives])
         print('')
         print(guess)
         print("You have {} guesses left".format(lives))
@@ -126,6 +242,7 @@ def play_game():
             print("Good guess the word did contain '"+letter+"'")
         # If live have run out break the loop and print failure message
         if lives<=0:
+            print(visual_lives[0])
             print("Too bad you ran out of guesses, the word was "+word)
             break
         # If there are no blanks left break the loop and print success message
