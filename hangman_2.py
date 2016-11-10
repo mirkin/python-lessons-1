@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Hangman Game
+# Hangman Game little more sophisticated than the basic version
 
 import random
 
@@ -26,7 +26,7 @@ title='''
  | |_| |/ _` | '_ \ / _` | '_ ` _ \ / _` | '_ \\
  |  _  | (_| | | | | (_| | | | | | | (_| | | | |
  |_| |_|\__,_|_| |_|\__, |_| |_| |_|\__,_|_| |_|
-                    |___/ Version: 1.0
+                    |___/ Version: 2.0
 '''
 def search_for_letter_in_word(word,letter,search_pointer=0,locations=[]):
     """ return a list containing all indexes of the letter in the word, the
@@ -66,6 +66,25 @@ def map_char_from_word1_to_word2(word1,word2,search_char,replace_char):
     for loc in locations:
         word2=replace_letter_in_word(word2,replace_char,loc)
     return word2
+
+def yes_or_no(question=''):
+    """ allow user to type yes/no YES/NO y/n Y/N to a given question and
+    return True if they type yes False for no. It will deal with cases where
+    they don't type in something sensible
+    """
+    answered=False
+    while not answered:
+        if question!='':
+          print (question)
+        answer=input().lower()
+        if answer!='yes' and answer!='no' and answer!='y' and answer!='n':
+          print ("Sorry, I don't understand '"+answer+
+            "' please answer yes or no or y or n.")
+        else:
+          answered=True
+    if answer=='n' or answer=='no':
+        return False
+    return True
 
 def play_game():
     """ Play a round of hangman
@@ -119,6 +138,5 @@ def play_game():
 
 while True:
     play_game()
-    play_again=input('Play again? (y/n) ')
-    if play_again=='n':
+    if not yes_or_no('Play again? (y/n)'):
         break
