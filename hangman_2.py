@@ -28,6 +28,7 @@ title='''
  |_| |_|\__,_|_| |_|\__, |_| |_| |_|\__,_|_| |_|
                     |___/ Version: 2.0
 '''
+# Message to show when a user quits the application
 bye_message='''
  ________             __          ____           ___  __          _          
 /_  __/ /  ___ ____  / /__ ___   / __/__  ____  / _ \/ /__ ___ __(_)__  ___ _
@@ -45,6 +46,7 @@ bye_message='''
                  /\___/                      /\___/                       
                  \/__/                       \/__/                        
 '''
+# Fill array with 10 blank strings then fill with ASCII art for each stage
 visual_lives=['']*10
 
 visual_lives[0]='''
@@ -224,6 +226,8 @@ def play_game():
     """
     print(title) # Print our awesome title
     lives=9 # Reset lives
+    incorrect_guesses=[] # list to hold mistakes
+    correct_guesses=[] # list to hold valid guesses
     word=random.choice(word_list) # Picks a word at random from our word_list
     # For checking let's use lowercase to avoid confusion
     word_lower=word.lower()
@@ -238,6 +242,10 @@ def play_game():
         print('')
         print(guess)
         print("You have {} guesses left".format(lives))
+        if len(incorrect_guesses)>0:
+            print("Incorrect guesses: "+",".join(incorrect_guesses))
+        if len(incorrect_guesses)>0:
+            print("Correct guesses: "+",".join(correct_guesses))
         # Continually request a letter change it to lower case just in case it's
         # upper. Only move on if it's a valid guess
         while True:
@@ -245,11 +253,14 @@ def play_game():
             if validate_letter(letter):
                 break
         # Find will return -1 if the letter isn't there so reduce the lives and
-        # print a failure message
+        # print a failure message. Also add letter to bad guesses
         if word_lower.find(letter)==-1:
             lives-=1
+            incorrect_guesses.append(letter)
             print("Bad luck the word doesn't contain '"+letter+"'")
         else:
+            # Correct guess so add it to the list
+            correct_guesses.append(letter)
             # The letter must be there so get a list of locations of that letter
             locations=search_for_letter_in_word(word_lower,letter)
             # Loop through the list of locations and copy the letter at that
