@@ -3,7 +3,7 @@
 
 # Hangman Game little more sophisticated than the basic version
 
-import random
+import random,json
 
 try:
         input=raw_input
@@ -232,6 +232,19 @@ def print_center_text(text):
     for line in lines:
         print(padding+line)
 
+def save_settings(data):
+    with open('settings.json','w') as outfile:
+        json.dump(settings,outfile,sort_keys=False,indent=2)
+
+def load_settings():
+    data={'screen_width':80,'show_guess_history':False}
+    try:
+        with open('settings.json') as infile:
+            data=json.load(infile)
+    except EnvironmentError:
+        print('There was a problem loadin settings')
+    return data
+
 def play_game():
     """ Play a round of hangman
     """
@@ -250,8 +263,8 @@ def play_game():
     guess=map_char_from_word1_to_word2(word_lower,guess,'-','-')
     while True: # Infinte loop we will break if we win or lose
         print_center_text(visual_lives[lives])
-        print_center_text('')
         print_center_text(guess)
+        print_center_text('')
         print_center_text("You have {} guesses left".format(lives))
         if len(incorrect_guesses)>0:
             print_center_text("Incorrect guesses: "+",".join(incorrect_guesses))
@@ -293,9 +306,11 @@ def play_game():
     print('')
     print_center_text('Thanks for playing.')
 
+settings=load_settings()
 while True:
     play_game()
     if not yes_or_no('Play again? (y/n)'):
         break
 
 print_center_text(bye_message)
+save_settings(settings)
