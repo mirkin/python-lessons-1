@@ -228,7 +228,7 @@ def print_center_text(text):
     for line in lines:
         if len(line)>max_length:
             max_length=len(line)
-    padding=" "*((80-max_length)/2)
+    padding=" "*int((80-max_length)/2)
     for line in lines:
         print(padding+line)
 
