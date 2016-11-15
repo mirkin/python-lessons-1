@@ -18,6 +18,7 @@ word_list=['School','parkrun','python','coding','function','string','variable',
         'flip-flops']
 blank_character='_'
 word_seperator=' '
+screen_width=80
 # Game title I used a little shell app called figlet to create it
 # see how to create multiline strings with tripple '''
 title='''
@@ -50,118 +51,118 @@ bye_message='''
 visual_lives=['']*10
 
 visual_lives[0]='''
-                 +---------+
-                 |         |
-                 @         |
-                /H\        |
-                / \        |
-                ___________|___________
-               /           |          /|
-              /______________________/ |
-              |                      | /
-              |______________________|/
+   +---------+
+   |         |
+   @         |
+  /H\        |
+  / \        |
+  ___________|___________
+ /           |          /|
+/______________________/ |
+|                      | /
+|______________________|/
 '''
 visual_lives[1]='''
-                 +---------+
-                 |         |
-                 @         |
-                /H\        |
-                  \        |
-                ___________|___________
-               /           |          /|
-              /______________________/ |
-              |                      | /
-              |______________________|/
+   +---------+
+   |         |
+   @         |
+  /H\        |
+    \        |
+  ___________|___________
+ /           |          /|
+/______________________/ |
+|                      | /
+|______________________|/
 '''
 visual_lives[2]='''
-                 +---------+
-                 |         |
-                 @         |
-                /H         |
-                  \        |
-                ___________|___________
-               /           |          /|
-              /______________________/ |
-              |                      | /
-              |______________________|/
+   +---------+
+   |         |
+   @         |
+  /H         |
+    \        |
+  ___________|___________
+ /           |          /|
+/______________________/ |
+|                      | /
+|______________________|/
 '''
 visual_lives[3]='''
-                 +---------+
-                 |         |
-                 @         |
-                /H         |
-                           |
-                ___________|___________
-               /           |          /|
-              /______________________/ |
-              |                      | /
-              |______________________|/
+   +---------+
+   |         |
+   @         |
+  /H         |
+             |
+  ___________|___________
+ /           |          /|
+/______________________/ |
+|                      | /
+|______________________|/
 '''
 visual_lives[4]='''
-                 +---------+
-                 |         |
-                 @         |
-                /          |
-                           |
-                ___________|___________
-               /           |          /|
-              /______________________/ |
-              |                      | /
-              |______________________|/
+   +---------+
+   |         |
+   @         |
+  /          |
+             |
+  ___________|___________
+ /           |          /|
+/______________________/ |
+|                      | /
+|______________________|/
 '''
 visual_lives[5]='''
-                 +---------+
-                 |         |
-                 @         |
-                           |
-                           |
-                ___________|___________
-               /           |          /|
-              /______________________/ |
-              |                      | /
-              |______________________|/
+   +---------+
+   |         |
+   @         |
+             |
+             |
+  ___________|___________
+ /           |          /|
+/______________________/ |
+|                      | /
+|______________________|/
 '''
 visual_lives[6]='''
-                 +---------+
-                 |         |
-                           |
-                           |
-                           |
-                ___________|___________
-               /           |          /|
-              /______________________/ |
-              |                      | /
-              |______________________|/
+   +---------+
+   |         |
+             |
+             |
+             |
+  ___________|___________
+ /           |          /|
+/______________________/ |
+|                      | /
+|______________________|/
 '''
 visual_lives[7]='''
-                 +---------+
-                           |
-                           |
-                           |
-                           |
-                ___________|___________
-               /           |          /|
-              /______________________/ |
-              |                      | /
-              |______________________|/
+   +---------+
+             |
+             |
+             |
+             |
+  ___________|___________
+ /           |          /|
+/______________________/ |
+|                      | /
+|______________________|/
 '''
 visual_lives[8]='''
-                           |
-                           |
-                           |
-                           |
-                ___________|___________
-               /           |          /|
-              /______________________/ |
-              |                      | /
-              |______________________|/
+             |
+             |
+             |
+             |
+  ___________|___________
+ /           |          /|
+/______________________/ |
+|                      | /
+|______________________|/
 '''
 visual_lives[9]='''
-                _______________________
-               /                      /|
-              /______________________/ |
-              |                      | /
-              |______________________|/
+  _______________________
+ /                      /|
+/______________________/ |
+|                      | /
+|______________________|/
 '''
 def search_for_letter_in_word(word,letter,search_pointer=0,locations=[]):
     """ return a list containing all indexes of the letter in the word, the
@@ -184,10 +185,10 @@ def validate_letter(letter,show_error_message=True):
     """ check letter is a single letter
     """
     if len(letter)!=1:
-        print('Whoops you need to type a single letter')
+        print_center_text('Whoops you need to type a single letter')
         return False
     if not letter.isalpha():
-        print('I can only accept letters')
+        print_center_text('I can only accept letters')
         return False
     return True
 
@@ -210,10 +211,10 @@ def yes_or_no(question=''):
     answered=False
     while not answered:
         if question!='':
-          print (question)
+          print_center_text (question)
         answer=input().lower()
         if answer!='yes' and answer!='no' and answer!='y' and answer!='n':
-          print ("Sorry, I don't understand '"+answer+
+          print_center_text ("Sorry, I don't understand '"+answer+
             "' please answer yes or no or y or n.")
         else:
           answered=True
@@ -221,10 +222,20 @@ def yes_or_no(question=''):
         return False
     return True
 
+def print_center_text(text):
+    lines=text.split('\n')
+    max_length=0
+    for line in lines:
+        if len(line)>max_length:
+            max_length=len(line)
+    padding=" "*((80-max_length)/2)
+    for line in lines:
+        print(padding+line)
+
 def play_game():
     """ Play a round of hangman
     """
-    print(title) # Print our awesome title
+    print_center_text(title) # Print our awesome title
     lives=9 # Reset lives
     incorrect_guesses=[] # list to hold mistakes
     correct_guesses=[] # list to hold valid guesses
@@ -238,14 +249,14 @@ def play_game():
     # Show any dashes in guess
     guess=map_char_from_word1_to_word2(word_lower,guess,'-','-')
     while True: # Infinte loop we will break if we win or lose
-        print(visual_lives[lives])
-        print('')
-        print(guess)
-        print("You have {} guesses left".format(lives))
+        print_center_text(visual_lives[lives])
+        print_center_text('')
+        print_center_text(guess)
+        print_center_text("You have {} guesses left".format(lives))
         if len(incorrect_guesses)>0:
-            print("Incorrect guesses: "+",".join(incorrect_guesses))
-        if len(incorrect_guesses)>0:
-            print("Correct guesses: "+",".join(correct_guesses))
+            print_center_text("Incorrect guesses: "+",".join(incorrect_guesses))
+        if len(correct_guesses)>0:
+            print_center_text("Correct guesses: "+",".join(correct_guesses))
         # Continually request a letter change it to lower case just in case it's
         # upper. Only move on if it's a valid guess
         while True:
@@ -257,7 +268,7 @@ def play_game():
         if word_lower.find(letter)==-1:
             lives-=1
             incorrect_guesses.append(letter)
-            print("Bad luck the word doesn't contain '"+letter+"'")
+            print_center_text("Bad luck the word doesn't contain '"+letter+"'")
         else:
             # Correct guess so add it to the list
             correct_guesses.append(letter)
@@ -268,23 +279,23 @@ def play_game():
             # print a success message
             for loc in locations:
                 guess=replace_letter_in_word(guess,word[loc],loc)
-            print("Good guess the word did contain '"+letter+"'")
+            print_center_text("Good guess the word did contain '"+letter+"'")
         # If live have run out break the loop and print failure message
         if lives<=0:
-            print(visual_lives[0])
-            print("Too bad you ran out of guesses, the word was "+word)
+            print_center_text(visual_lives[0])
+            print_center_text("Too bad you ran out of guesses, the word was "+word)
             break
         # If there are no blanks left break the loop and print success message
         if guess.find(blank_character)==-1:
-            print(guess)
-            print("Well done, you guessed the word")
+            print_center_text(guess)
+            print_center_text("Well done, you guessed the word")
             break
     print('')
-    print('Thanks for playing.')
+    print_center_text('Thanks for playing.')
 
 while True:
     play_game()
     if not yes_or_no('Play again? (y/n)'):
         break
 
-print(bye_message)
+print_center_text(bye_message)
