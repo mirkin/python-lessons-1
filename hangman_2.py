@@ -3,7 +3,7 @@
 
 # Hangman Game little more sophisticated than the basic version
 
-import random,json
+import random,json,time,sys
 
 try:
         input=raw_input
@@ -222,7 +222,7 @@ def yes_or_no(question=''):
         return False
     return True
 
-def print_center_text(text):
+def print_center_text(text,delay=0):
     lines=text.split('\n')
     max_length=0
     for line in lines:
@@ -230,7 +230,15 @@ def print_center_text(text):
             max_length=len(line)
     padding=" "*int((80-max_length)/2)
     for line in lines:
-        print(padding+line)
+        line=padding+line
+        if delay==0:
+            print(line) 
+        else:
+            for letter in line:
+                sys.stdout.write(letter)
+                sys.stdout.flush()
+                time.sleep(delay)
+            print('')
 
 def save_settings(data):
     with open('settings.json','w') as outfile:
@@ -248,7 +256,7 @@ def load_settings():
 def play_game():
     """ Play a round of hangman
     """
-    print_center_text(title) # Print our awesome title
+    print_center_text(title,0.005) # Print our awesome title
     lives=9 # Reset lives
     incorrect_guesses=[] # list to hold mistakes
     correct_guesses=[] # list to hold valid guesses
@@ -312,5 +320,5 @@ while True:
     if not yes_or_no('Play again? (y/n)'):
         break
 
-print_center_text(bye_message)
+print_center_text(bye_message,0.005)
 save_settings(settings)
